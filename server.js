@@ -1,6 +1,13 @@
 const express = require('express');
 const { RtcTokenBuilder, RtcRole } = require('agora-access-token');
+const { inject } = require('@vercel/analytics');
 require('dotenv').config();
+
+// Initialize Vercel Web Analytics
+inject({
+  mode: process.env.NODE_ENV === 'production' ? 'production' : 'development',
+  debug: process.env.NODE_ENV !== 'production'
+});
 
 const app = express();
 app.use(express.json());
